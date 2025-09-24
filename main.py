@@ -15,7 +15,7 @@ from requests_cache import CachedSession
 
 ROOT_DIR = Path(__file__).parent.resolve()
 ALL_CAMPGROUNDS_PATH = ROOT_DIR / "all_campground.json"
-OUTPUT_MAP_PATH = "index.html"
+OUTPUT_MAP_PATH =  ROOT_DIR / "dist" / "index.html"
 
 
 AVAILABILITY_URL_TEMPLATE  = (
@@ -148,6 +148,7 @@ def create_map(campgrounds: Iterable[Dict[str, Any]]) -> folium.Map:
 
 def main() -> int:
     if not ALL_CAMPGROUNDS_PATH.exists():
+        print(f"Missing file: {ALL_CAMPGROUNDS_PATH}", file=sys.stderr)
         return 1
 
     campgrounds = load_campgrounds(ALL_CAMPGROUNDS_PATH)
@@ -170,7 +171,8 @@ def main() -> int:
         enriched.append(cg_copy)
 
     fmap = create_map(enriched)
-    print(str(fmap))
+    fmap.save(str(OUTPUT_MAP_PATH))
+    print(f"Wrote map to {OUTPUT_MAP_PATH}")
     return 0
 
 

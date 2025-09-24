@@ -17,7 +17,7 @@ jobs:
       - name: Run script
         run: |
           mkdir -p dist
-          uv run main.py > dist/index.html
+          uv run main.py
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
