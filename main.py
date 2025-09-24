@@ -148,7 +148,6 @@ def create_map(campgrounds: Iterable[Dict[str, Any]]) -> folium.Map:
 
 def main() -> int:
     if not ALL_CAMPGROUNDS_PATH.exists():
-        print(f"Missing file: {ALL_CAMPGROUNDS_PATH}", file=sys.stderr)
         return 1
 
     campgrounds = load_campgrounds(ALL_CAMPGROUNDS_PATH)
@@ -171,8 +170,7 @@ def main() -> int:
         enriched.append(cg_copy)
 
     fmap = create_map(enriched)
-    fmap.save(str(OUTPUT_MAP_PATH))
-    print(f"Wrote map to {OUTPUT_MAP_PATH}")
+    print(str(fmap))
     return 0
 
 
