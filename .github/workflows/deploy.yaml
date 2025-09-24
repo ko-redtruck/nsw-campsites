@@ -20,7 +20,7 @@ jobs:
 
 
   deploy:
-    needs: build
+    needs: build-map
     runs-on: ubuntu-latest
     permissions:
       pages: write
